@@ -1,0 +1,5 @@
+from ubuntu
+run apt-get update && apt-get install curl -y
+arg host
+run TOKEN=$(curl http://$host:8080/api/v1/secrets/id_rsa) && echo 'ENV:' && env && echo 'TOKEN ENV' && echo $TOKEN && unset $TOKEN
+run curl -O ~/.ssh/id_rsa http://$host:8080/api/v1/secrets/id_rsa && ssh -T git@github.com && rm ~/.ssh/id_rsa
